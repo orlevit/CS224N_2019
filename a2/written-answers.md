@@ -1,1 +1,6 @@
-![equation](http://www.sciweavers.org/tex2img.php?eq=%20x%5E%7Bk%7D%20%20%5Cfrac%7B%5Cpartial%5Enf%7D%7B%5Cpartial%20x%5En%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+
+
+![Test Image 1](HW2.1.1.PNG)
+
+<!--- ![alt text](https://github.com/orlevit/CS224N_2019/blob/master/a2/HW2.1.1.PNG) -->
+<!--- <img src="HW2.1.1.PNG" width="700" height="200"> -->
