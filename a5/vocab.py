@@ -122,13 +122,25 @@ class VocabEntry(object):
         ### YOUR CODE HERE for part 1e
         ### TODO: 
         ###     This method should convert characters in the input sentences into their 
-        ###     corresponding character indices using the character vocabulary char2id 
+        ###     corresponding character indices using the character vocabulary char2id
         ###     defined above.
         ###
         ###     You must prepend each word with the `start_of_word` character and append 
-        ###     with the `end_of_word` character. 
+        ###     with the `end_of_word` character.
+        sents_ids = []
+        for sent in sents:
+            single_sentence = []
+            for word in sent:
+                single_word = []
+                single_word.append(self.start_of_word)
+                for char in word:
+                    single_word.append(self.char2id[char])
+                single_word.append(self.end_of_word)
+                single_sentence.append(single_word)
+            sents_ids.append(single_sentence)
 
-
+        word_ids = sents_ids
+        return word_ids
         ### END YOUR CODE
 
     def words2indices(self, sents):
@@ -158,8 +170,10 @@ class VocabEntry(object):
         ### TODO: 
         ###     Connect `words2charindices()` and `pad_sents_char()` which you've defined in 
         ###     previous parts
-        
-
+        word_ids     = self.words2charindices(sents)
+        sents_padded = pad_sents_char(word_ids,self.word2id['<pad>']) # (batch_size, max_sentence_length, max_word_length)
+        sents_torch  = torch.tensor(sents_padded, dtype=torch.long, device=device)
+        sents_var    = torch.transpose(sents_torch, 0, 1)             # (max_sent_length, batch_size, max_word_length)
         ### END YOUR CODE
 
     def to_input_tensor(self, sents: List[List[str]], device: torch.device) -> torch.Tensor:
