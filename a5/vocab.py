@@ -74,7 +74,7 @@ class VocabEntry(object):
     def __contains__(self, word):
         """ Check if word is captured by VocabEntry.
         @param word (str): word to look up
-        @returns contains (bool): whether word is contained    
+        @returns contains (bool): whether word is contained
         """
         return word in self.word2id
 
@@ -171,9 +171,10 @@ class VocabEntry(object):
         ###     Connect `words2charindices()` and `pad_sents_char()` which you've defined in 
         ###     previous parts
         word_ids     = self.words2charindices(sents)
-        sents_padded = pad_sents_char(word_ids,self.word2id['<pad>']) # (batch_size, max_sentence_length, max_word_length)
+        sents_padded = pad_sents_char(word_ids,self.char2id['<pad>']) # (batch_size, max_sentence_length, max_word_length)
         sents_torch  = torch.tensor(sents_padded, dtype=torch.long, device=device)
         sents_var    = torch.transpose(sents_torch, 0, 1)             # (max_sent_length, batch_size, max_word_length)
+        return(sents_var)
         ### END YOUR CODE
 
     def to_input_tensor(self, sents: List[List[str]], device: torch.device) -> torch.Tensor:
